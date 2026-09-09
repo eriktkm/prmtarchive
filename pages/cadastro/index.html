@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cadastro | Primata Archive</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <!-- Scanlines -->
+    <div class="scanlines"></div>
+
+    <!-- Grid de fundo -->
+    <div class="pixel-grid"></div>
+
+    <main class="register-page">
+
+        <!-- HEADER -->
+        <header class="register-header">
+
+            <a href="../lading/index.html" class="logo">
+                <span class="logo-symbol">◆</span>
+                PRIMATA <span>ARCHIVE</span>
+            </a>
+
+        </header>
+
+
+        <!-- CADASTRO -->
+        <section class="register-container">
+
+            <div class="register-window">
+
+                <!-- Barra superior -->
+                <div class="window-header">
+
+                    <span>CREATE_USER.EXE</span>
+
+                    <div class="window-buttons">
+                        <span>_</span>
+                        <span>□</span>
+                        <span>×</span>
+                    </div>
+
+                </div>
+
+
+                <!-- Conteúdo -->
+                <div class="register-content">
+
+                    <div class="terminal">
+                        <span>&gt;</span>
+                        CREATE_ACCOUNT<span class="blink">_</span>
+                    </div>
+
+
+                    <h1>
+                        ENTRE PARA<br>
+                        <span>O ARQUIVO.</span>
+                    </h1>
+
+
+                    <p class="register-description">
+                        Crie sua conta e faça parte da comunidade musical.
+                    </p>
+
+
+                    <form id="registerForm">
+
+                        <!-- Nome -->
+                        <div class="input-group">
+
+                            <label for="username">
+                                NOME DE USUÁRIO
+                            </label>
+
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                placeholder="seu_usuario"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Email -->
+                        <div class="input-group">
+
+                            <label for="email">
+                                E-MAIL
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="seu@email.com"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Senha -->
+                        <div class="input-group">
+
+                            <label for="password">
+                                SENHA
+                            </label>
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="********"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Confirmar senha -->
+                        <div class="input-group">
+
+                            <label for="confirmPassword">
+                                CONFIRMAR SENHA
+                            </label>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
+                                placeholder="********"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- Termos -->
+                        <label class="terms">
+
+                            <input
+                                type="checkbox"
+                                id="terms"
+                                required
+                            >
+
+                            <span>
+                                ACEITO OS TERMOS DE USO DA PRIMATA ARCHIVE.
+                            </span>
+
+                        </label>
+
+
+                        <!-- Botão -->
+                        <button
+                            type="submit"
+                            class="register-button"
+                        >
+                            CRIAR CONTA
+                            <span>→</span>
+                        </button>
+
+                    </form>
+
+
+                    <!-- Login -->
+                    <div class="login-area">
+
+                        <p>
+                            JÁ POSSUI UMA CONTA?
+                        </p>
+
+                        <a href="../login/index.html">
+                            FAZER LOGIN
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Footer da janela -->
+                <div class="window-footer">
+
+                    <span>STATUS: READY</span>
+
+                    <span>v1.0.0</span>
+
+                </div>
+
+            </div>
+
+
+            <!-- Decoração -->
+            <div class="register-decoration">
+
+                <span>02</span>
+                <span>NEW_USER</span>
+                <span>///</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer class="register-footer">
+
+            <span>
+                © 2026 PRIMATA ARCHIVE
+            </span>
+
+            <span>
+                JOIN THE DIGITAL UNDERGROUND
+            </span>
+
+        </footer>
+
+    </main>
+
+
+    <script src="./main.js"></script>
+
+</body>
+</html>
