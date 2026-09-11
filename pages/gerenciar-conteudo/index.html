@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerenciar Conteúdo | Primata Archive</title>
+<link rel="stylesheet" href="../landing/style.css">
+<link rel="stylesheet" href="../gestao.css">
+</head>
+<body class="gestao-page">
+<div class="pixel-grid"></div>
+<div class="scanlines"></div>
+
+<header class="header">
+    <a href="../landing/index.html" class="logo">PRIMATA<br>ARCHIVE</a>
+    <nav class="nav">
+        <a href="../landing/index.html">HOME</a>
+        <a href="../artistas/index.html">ARTISTAS</a>
+        <a href="../musicas/index.html">TOP MÚSICAS</a>
+        <a href="../albuns/index.html">ÁLBUNS</a>
+        <a href="../comunidade/index.html">COMUNIDADE</a>
+        <a href="../configuracoes/index.html" class="">CONFIG</a>
+    </nav>
+    <a href="../perfil/index.html" class="header-button">MEU PERFIL</a>
+</header>
+
+<main class="home">
+
+<section class="page-title">
+    <span class="mini-title">ADMIN // CONTENT MODERATION</span>
+    <h1>GERENCIAR<br>CONTEÚDO</h1>
+    <p>Modere músicas, publicações, comentários e outros conteúdos enviados pelos usuários.</p>
+</section>
+
+<section class="section">
+<div class="panel">
+    <div class="filter-bar">
+        <input placeholder="Pesquisar conteúdo...">
+        <select><option>Todos os tipos</option><option>Músicas</option><option>Posts</option><option>Comentários</option></select>
+        <select><option>Mais recentes</option><option>Mais denunciados</option></select>
+    </div>
+    <div class="table-wrap">
+    <table class="pixel-table">
+        <thead><tr><th>CONTEÚDO</th><th>AUTOR</th><th>TIPO</th><th>STATUS</th><th>AÇÕES</th></tr></thead>
+        <tbody>
+            <tr><td><strong>Neon Dreams</strong></td><td>Nova Echo</td><td>MÚSICA</td><td><span class="status">PUBLICADO</span></td><td><button class="pixel-button alt demo-action">ANALISAR</button></td></tr>
+            <tr><td><strong>Novo single saiu hoje</strong></td><td>Nova Echo</td><td>POST</td><td><span class="status">PUBLICADO</span></td><td><button class="pixel-button alt demo-action">ANALISAR</button></td></tr>
+            <tr><td><strong>Comentário #481</strong></td><td>pixel_youth</td><td>COMENTÁRIO</td><td><span class="status">REVISÃO</span></td><td><button class="pixel-button alt demo-action">ANALISAR</button></td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+</section>
+
+</main>
+<footer class="player">
+    <div class="player-song">
+        <div class="player-cover">NE</div>
+        <div><strong>Neon Dreams</strong><span>Nova Echo</span></div>
+    </div>
+    <div class="player-controls">
+        <button>↶</button>
+        <button class="main-play">▶</button>
+        <button>↷</button>
+    </div>
+    <div class="player-progress">
+        <span>00:00</span><div class="progress-bar"><div></div></div><span>03:42</span>
+    </div>
+</footer>
+<script src="../gestao.js"></script>
+</body>
+</html>

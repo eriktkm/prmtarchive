@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard Administrativo | Primata Archive</title>
+<link rel="stylesheet" href="../landing/style.css">
+<link rel="stylesheet" href="../gestao.css">
+</head>
+<body class="gestao-page">
+<div class="pixel-grid"></div>
+<div class="scanlines"></div>
+
+<header class="header">
+    <a href="../landing/index.html" class="logo">PRIMATA<br>ARCHIVE</a>
+    <nav class="nav">
+        <a href="../landing/index.html">HOME</a>
+        <a href="../artistas/index.html">ARTISTAS</a>
+        <a href="../musicas/index.html">TOP MÚSICAS</a>
+        <a href="../albuns/index.html">ÁLBUNS</a>
+        <a href="../comunidade/index.html">COMUNIDADE</a>
+        <a href="../configuracoes/index.html" class="">CONFIG</a>
+    </nav>
+    <a href="../perfil/index.html" class="header-button">MEU PERFIL</a>
+</header>
+
+<main class="home">
+
+<section class="page-title">
+    <span class="mini-title">ADMIN // CONTROL ROOM</span>
+    <h1>DASHBOARD<br>ADMINISTRATIVO</h1>
+    <p>Central de controle para usuários, conteúdos, denúncias e comunidades.</p>
+</section>
+
+<section class="section">
+    <div class="grid-3">
+        <div class="pixel-card"><span class="code-label">USUÁRIOS</span><span class="big-number">4.821</span><span class="muted">+143 este mês</span></div>
+        <div class="pixel-card"><span class="code-label">CONTEÚDOS</span><span class="big-number">12.430</span><span class="muted">músicas + posts</span></div>
+        <div class="pixel-card"><span class="code-label">DENÚNCIAS</span><span class="big-number">27</span><span class="muted">aguardando análise</span></div>
+    </div>
+</section>
+
+<section class="section">
+<div class="grid-2">
+    <a class="pixel-card" href="../gerenciar-usuarios/index.html"><span class="code-label">ADMIN_001</span><h3>GERENCIAR USUÁRIOS</h3><p>Consultar, bloquear e administrar contas.</p></a>
+    <a class="pixel-card" href="../gerenciar-conteudo/index.html"><span class="code-label">ADMIN_002</span><h3>GERENCIAR CONTEÚDO</h3><p>Moderar músicas, posts e comentários.</p></a>
+    <a class="pixel-card" href="../denuncias/index.html"><span class="code-label">ADMIN_003</span><h3>DENÚNCIAS</h3><p>Verificar denúncias e tomar ações de moderação.</p></a>
+    <a class="pixel-card" href="../gerenciar-comunidades/index.html"><span class="code-label">ADMIN_004</span><h3>GERENCIAR COMUNIDADES</h3><p>Administrar comunidades e moderadores.</p></a>
+</div>
+</section>
+
+</main>
+<footer class="player">
+    <div class="player-song">
+        <div class="player-cover">NE</div>
+        <div><strong>Neon Dreams</strong><span>Nova Echo</span></div>
+    </div>
+    <div class="player-controls">
+        <button>↶</button>
+        <button class="main-play">▶</button>
+        <button>↷</button>
+    </div>
+    <div class="player-progress">
+        <span>00:00</span><div class="progress-bar"><div></div></div><span>03:42</span>
+    </div>
+</footer>
+<script src="../gestao.js"></script>
+</body>
+</html>
