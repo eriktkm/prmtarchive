@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Criar Lançamento | Primata Archive</title>
+<link rel="stylesheet" href="../landing/style.css">
+<link rel="stylesheet" href="../gestao.css">
+</head>
+<body class="gestao-page">
+<div class="pixel-grid"></div>
+<div class="scanlines"></div>
+
+<header class="header">
+    <a href="../landing/index.html" class="logo">PRIMATA<br>ARCHIVE</a>
+    <nav class="nav">
+        <a href="../landing/index.html">HOME</a>
+        <a href="../artistas/index.html">ARTISTAS</a>
+        <a href="../musicas/index.html">MÚSICAS</a>
+        <a href="../albuns/index.html">ÁLBUNS</a>
+        <a href="../playlist/index.html">PLAYLIST</a>
+        <a href="../biblioteca/index.html">BIBLIOTECA</a>
+        <a href="../comunidade/index.html">COMUNIDADE</a>
+    <a href="../resultados-pesquisa/index.html" class="nav-search" aria-label="Pesquisar" title="Pesquisar">⌕</a></nav>
+    <a href="../login/index.html" class="header-button">ENTRAR</a>
+</header>
+
+<main class="home">
+
+<section class="page-title">
+    <span class="mini-title">ARTIST // RELEASE BUILDER</span>
+    <h1>CRIAR<br>LANÇAMENTO</h1>
+    <p>Cadastre um novo single, EP ou álbum para publicar no Primata Archive.</p>
+</section>
+
+<section class="section">
+<div class="panel">
+    <div class="notice"><strong>RELEASE_001</strong><br>Preencha as informações do lançamento. O envio real será conectado ao backend posteriormente.</div>
+    <div class="form-grid">
+        <div class="field"><label>TÍTULO DO LANÇAMENTO</label><input placeholder="Ex.: NO SIGNAL"></div>
+        <div class="field"><label>TIPO</label><select><option>Single</option><option>EP</option><option>Álbum</option></select></div>
+        <div class="field"><label>DATA DE LANÇAMENTO</label><input type="date"></div>
+        <div class="field"><label>GÊNERO</label><select><option>Trap / Rap</option><option>Indie</option><option>Rock</option><option>Eletrônica</option></select></div>
+        <div class="field full"><label>DESCRIÇÃO</label><textarea placeholder="Fale sobre este lançamento..."></textarea></div>
+        <div class="field"><label>CAPA DO LANÇAMENTO</label><input type="file"></div>
+        <div class="field"><label>ARQUIVO DE ÁUDIO</label><input type="file"></div>
+    </div>
+    <div class="actions"><button class="pixel-button demo-action">SALVAR RASCUNHO</button><button class="pixel-button alt demo-action">PUBLICAR</button></div>
+</div>
+</section>
+
+</main>
+<footer class="player">
+    <div class="player-song">
+        <div class="player-cover">NE</div>
+        <div><strong>Neon Dreams</strong><span>Nova Echo</span></div>
+    </div>
+    <div class="player-controls">
+        <button>↶</button>
+        <button class="main-play">▶</button>
+        <button>↷</button>
+    </div>
+    <div class="player-progress">
+        <span>00:00</span><div class="progress-bar"><div></div></div><span>03:42</span>
+    </div>
+</footer>
+<script src="../api.js"></script>
+<script src="../gestao.js"></script>
+
+    <script src="../menu.js"></script>
+</body>
+</html>
