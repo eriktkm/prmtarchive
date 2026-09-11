@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Perfil do artista | Primata Archive</title><link rel="stylesheet" href="../landing/style.css"><link rel="stylesheet" href="../social.css"></head>
+<body><div class="pixel-grid"></div><div class="scanlines"></div>
+<header class="header"><a href="../landing/index.html" class="logo">PRIMATA<br>ARCHIVE</a><nav class="nav">
+        <a href="../landing/index.html">HOME</a>
+        <a href="../artistas/index.html">ARTISTAS</a>
+        <a href="../musicas/index.html">MÚSICAS</a>
+        <a href="../albuns/index.html">ÁLBUNS</a>
+        <a href="../playlist/index.html">PLAYLIST</a>
+        <a href="../biblioteca/index.html">BIBLIOTECA</a>
+        <a href="../comunidade/index.html">COMUNIDADE</a>
+    <a href="../resultados-pesquisa/index.html" class="nav-search" aria-label="Pesquisar" title="Pesquisar">⌕</a></nav><a href="../login/index.html" class="header-button">ENTRAR</a></header>
+<main class="home"><section class="page-title"><span class="mini-title">ARTIST // PROFILE</span><div class="artist-head" style="margin-top:20px"><div class="artist-avatar">DE</div><div><h1 style="margin:0">D.EVIL</h1><p>TRAP / RAP • INDEPENDENTE</p><p class="muted">São Paulo, Brasil</p></div></div><div class="actions"><button id="follow-button" class="pixel-button">SEGUIR ARTISTA</button><a class="pixel-button alt" href="../artistas/index.html">VOLTAR AOS ARTISTAS</a></div></section><section class="section"><div class="section-header"><div><span class="section-code">ARTIST_001</span><h2>LANÇAMENTOS</h2></div></div><div class="grid-3"><a class="pixel-card" href="../albuns/index.html"><span class="code-label">ALBUM</span><h3>HANDS OF DESTINY</h3><p>Álbum • 10 faixas</p></a><a class="pixel-card" href="../musicas/index.html"><span class="code-label">SINGLE</span><h3>NEW STEP</h3><p>Single • 03:42</p></a><a class="pixel-card" href="../musicas/index.html"><span class="code-label">SINGLE</span><h3>DIE AS STAR</h3><p>Single • 02:58</p></a></div></section></main>
+<script src="../api.js"></script><script src="../social.js"></script><script>document.getElementById('follow-button').addEventListener('click', async function(){try{await PrimataAPI.post('/artistas/1/seguir',{});this.textContent='SEGUINDO ✓';}catch(e){this.textContent='SEGUIR ARTISTA';console.log('Endpoint aguardando backend.');}});</script>    <script src="../menu.js"></script>
+</body></html>
