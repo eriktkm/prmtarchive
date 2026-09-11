@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primata Archive — Editar perfil</title><link rel="stylesheet" href="../shared.css">    <link rel="stylesheet" href="../site-overrides.css">
+</head>
+<body><div class="pixel-grid"></div><div class="scanlines"></div>
+
+<header class="header">
+  <a href="../../index.html" class="logo">PRIMATA<br>ARCHIVE</a>
+  <nav class="nav">
+        <a href="../../index.html">HOME</a>
+        <a href="../artistas/index.html">ARTISTAS</a>
+        <a href="../musicas/index.html">MÚSICAS</a>
+        <a href="../albuns/index.html">ÁLBUNS</a>
+        <a href="../playlist/index.html">PLAYLIST</a>
+        <a href="../biblioteca/index.html">BIBLIOTECA</a>
+        <a href="../comunidade/index.html">COMUNIDADE</a>
+    <a href="../resultados-pesquisa/index.html" class="nav-search" aria-label="Pesquisar" title="Pesquisar"><span class="nav-search-icon" aria-hidden="true"></span></a></nav>
+  <a href="../login/index.html" class="header-button">ENTRAR</a>
+</header><main class="home">
+<section class="page-title"><span class="mini-title">ACCOUNT // EDIT_PROFILE</span><h1>EDITAR<br>PERFIL</h1><p class="description">Atualize as informações que aparecem no seu perfil público.</p></section>
+<section class="section"><div class="panel">
+<div class="row" style="align-items:flex-start;margin-bottom:28px"><div class="avatar" id="profile-avatar"></div><div><span class="badge">AVATAR</span><p class="meta" style="margin-top:8px">JPG/PNG • recomendado 500×500</p><button class="pixel-button alt" style="margin-top:12px">TROCAR IMAGEM</button></div></div>
+<div class="field"><label>NOME DE USUÁRIO</label><input></div>
+<div class="field"><label>NOME DE EXIBIÇÃO</label><input></div>
+<div class="field"><label>BIO</label><textarea></textarea></div>
+<div class="field"><label>GÊNERO FAVORITO</label><select><option>TRAP</option><option>AMBIENTE</option><option>ACID</option><option>METAL</option><option>INDIE</option></select></div>
+<div class="actions"><button class="pixel-button">SALVAR ALTERAÇÕES</button><a class="pixel-button alt" href="../perfil/index.html">CANCELAR</a></div>
+</div></section>
+</main>
+<footer class="player">
+    <div class="player-song"><div class="player-cover"></div><div><strong id="current-song"></strong><span id="current-artist"></span></div></div>
+    <div class="player-controls"><button type="button">↶</button><button class="main-play" type="button">▶</button><button type="button">↷</button></div>
+    <div class="player-progress"><span>00:00</span><div class="progress-bar"><div></div></div><span>00:00</span></div>
+</footer>
+<script src="../api.js"></script>
+<script src="../social.js"></script>
+    <script src="../dados.js"></script>
+<script src="../menu.js"></script>
+</body></html>

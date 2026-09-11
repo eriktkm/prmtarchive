@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerenciar Conteúdo | Primata Archive</title>
+<link rel="stylesheet" href="../shared.css">
+    <link rel="stylesheet" href="../site-overrides.css">
+</head>
+<body class="gestao-page">
+<div class="pixel-grid"></div>
+<div class="scanlines"></div>
+
+<header class="header">
+    <a href="../../index.html" class="logo">PRIMATA<br>ARCHIVE</a>
+    <nav class="nav">
+        <a href="../../index.html">HOME</a>
+        <a href="../artistas/index.html">ARTISTAS</a>
+        <a href="../musicas/index.html">MÚSICAS</a>
+        <a href="../albuns/index.html">ÁLBUNS</a>
+        <a href="../playlist/index.html">PLAYLIST</a>
+        <a href="../biblioteca/index.html">BIBLIOTECA</a>
+        <a href="../comunidade/index.html">COMUNIDADE</a>
+    <a href="../resultados-pesquisa/index.html" class="nav-search" aria-label="Pesquisar" title="Pesquisar"><span class="nav-search-icon" aria-hidden="true"></span></a></nav>
+    <a href="../login/index.html" class="header-button">ENTRAR</a>
+</header>
+
+<main class="home">
+
+<section class="page-title">
+    <span class="mini-title">ADMIN // CONTENT MODERATION</span>
+    <h1>GERENCIAR<br>CONTEÚDO</h1>
+    <p>Modere músicas, publicações, comentários e outros conteúdos enviados pelos usuários.</p>
+</section>
+
+<section class="section">
+<div class="panel">
+    <div class="filter-bar">
+        <input placeholder="Pesquisar conteúdo...">
+        <select><option>Todos os tipos</option><option>Músicas</option><option>Posts</option><option>Comentários</option></select>
+        <select><option>Mais recentes</option><option>Mais denunciados</option></select>
+    </div>
+    <div class="table-wrap">
+    <table class="pixel-table" data-backend-table="/admin/conteudos">
+        <thead><tr><th>CONTEÚDO</th><th>AUTOR</th><th>TIPO</th><th>STATUS</th><th>AÇÕES</th></tr></thead>
+        <tbody></tbody>
+    </table>
+    </div>
+</div>
+</section>
+
+</main>
+<footer class="player">
+    <div class="player-song"><div class="player-cover"></div><div><strong id="current-song"></strong><span id="current-artist"></span></div></div>
+    <div class="player-controls"><button type="button">↶</button><button class="main-play" type="button">▶</button><button type="button">↷</button></div>
+    <div class="player-progress"><span>00:00</span><div class="progress-bar"><div></div></div><span>00:00</span></div>
+</footer>
+<script src="../api.js"></script>
+<script src="../gestao.js"></script>
+
+    <script src="../dados.js"></script>
+<script src="../menu.js"></script>
+</body>
+</html>
