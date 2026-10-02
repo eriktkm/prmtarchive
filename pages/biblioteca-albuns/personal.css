@@ -1,0 +1,191 @@
+
+/* PRIMATA ARCHIVE — páginas pessoais da biblioteca */
+.personal-library {
+    padding-bottom: 120px;
+}
+
+.personal-library .personal-hero {
+    margin-top: 45px;
+    padding: 35px;
+    background: var(--blue);
+    border: 3px solid var(--light-blue);
+    box-shadow: 8px 8px 0 var(--blue), 14px 14px 0 var(--light-blue);
+}
+
+.personal-library .personal-hero h1 {
+    font-family: var(--font-pixel);
+    font-size: clamp(24px, 4vw, 42px);
+    line-height: 1.5;
+    margin: 18px 0;
+}
+
+.personal-library .personal-hero p {
+    max-width: 720px;
+    font-size: 24px;
+}
+
+.personal-toolbar {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.personal-search {
+    flex: 1;
+    min-width: 240px;
+    height: 48px;
+    padding: 0 14px;
+    border: 2px solid #000;
+    background: #fff;
+    color: #000;
+    font-family: var(--font-text);
+    font-size: 22px;
+    outline: none;
+}
+
+.personal-search:focus {
+    box-shadow: 4px 4px 0 var(--light-blue);
+}
+
+.personal-content {
+    margin-top: 55px;
+}
+
+.personal-list {
+    border-top: 2px solid var(--light-blue);
+}
+
+.personal-item {
+    display: grid;
+    grid-template-columns: 58px 62px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    min-height: 82px;
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(112,133,202,.5);
+    text-decoration: none;
+    color: #000;
+}
+
+.personal-item:hover {
+    background: rgba(145,167,226,.5);
+}
+
+.personal-cover {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--light-blue);
+    border: 2px solid #000;
+    font-family: var(--font-pixel);
+    font-size: 9px;
+}
+
+.personal-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.personal-data strong {
+    display: block;
+    font-size: 25px;
+}
+
+.personal-data span {
+    display: block;
+    font-size: 18px;
+    opacity: .8;
+}
+
+.personal-meta {
+    font-family: var(--font-pixel);
+    font-size: 7px;
+    text-align: right;
+}
+
+.personal-empty {
+    padding: 45px 25px;
+    border: 3px dashed var(--light-blue);
+    background: rgba(255,255,255,.35);
+    text-align: center;
+}
+
+.personal-empty h3 {
+    font-family: var(--font-pixel);
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.personal-empty p {
+    font-size: 21px;
+}
+
+.personal-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.personal-card {
+    color: #000;
+    text-decoration: none;
+    background: var(--blue);
+    border: 3px solid var(--light-blue);
+    padding: 12px;
+    transition: .15s;
+}
+
+.personal-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 6px 6px 0 var(--light-blue);
+}
+
+.personal-card-cover {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--light-blue);
+    border: 2px solid #000;
+    font-family: var(--font-pixel);
+    font-size: 20px;
+    overflow: hidden;
+}
+
+.personal-card-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.personal-card h3 {
+    font-family: var(--font-pixel);
+    font-size: 10px;
+    line-height: 1.6;
+    margin: 13px 0 8px;
+}
+
+.personal-card p {
+    font-size: 18px;
+}
+
+@media (max-width: 900px) {
+    .personal-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .personal-library .personal-hero { padding: 24px 18px; }
+    .personal-item {
+        grid-template-columns: 42px 52px 1fr;
+        gap: 10px;
+    }
+    .personal-cover { width: 52px; height: 52px; }
+    .personal-meta { display: none; }
+    .personal-cards { grid-template-columns: 1fr; }
+}
