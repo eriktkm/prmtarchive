@@ -1,0 +1,16 @@
+/* PADRÃO GLOBAL - Primata Archive */
+.header{padding-left:24px;padding-right:24px;gap:22px}
+.nav{justify-content:flex-start;gap:18px;overflow-x:auto;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{flex:0 0 auto}
+.home{width:min(1200px,calc(100% - 48px))}
+.community-cover,.detail-page,.page-title,.welcome,.panel,.card,.pixel-card,.post{border-radius:0}
+.community-cover{margin-top:45px}
+.community-intro{flex-wrap:wrap}
+.tabs{margin-top:25px}
+.dynamic-cover{border-radius:0}
+.backend-json{margin:0;white-space:pre-wrap;overflow:auto;font-family:var(--font-text);font-size:20px;line-height:1.2}
+.table-wrap{overflow-x:auto}
+.pixel-table{width:100%;border-collapse:collapse}
+.pixel-table th,.pixel-table td{padding:14px;border-bottom:2px solid var(--light-blue);text-align:left}
+@media(max-width:900px){.header{padding-left:16px;padding-right:16px}.home{width:min(1200px,calc(100% - 28px))}.nav{gap:13px}}
