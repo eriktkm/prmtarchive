@@ -6,7 +6,7 @@ using PrimataArchive.Api.Models;
 namespace PrimataArchive.Api.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/albuns")]
 public class AlbumController : ControllerBase
 {
     private readonly PrimataArchiveContext _context;

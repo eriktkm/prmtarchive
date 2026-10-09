@@ -6,13 +6,13 @@ using PrimataArchive.Api.Models;
 
 namespace PrimataArchive.Api.Controllers;
 
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ComunidadeController : ControllerBase
-    {
-        private readonly PrimataArchiveContext _context;
+[ApiController]
+[Route("api/[controller]")]
+public class ComunidadeController : ControllerBase
+{
+    private readonly PrimataArchiveContext _context;
 
-        public ComunidadeController(PrimataArchiveContext context)
+    public ComunidadeController(PrimataArchiveContext context)
     {
         _context = context;
     }
@@ -27,52 +27,51 @@ namespace PrimataArchive.Api.Controllers;
     public async Task<IActionResult> ObterComunidades()
     {
         var comunidades = await _context.Comunidades
-        .Include(c => c.IdUsuarioCriadorNavigation)
-        .Include(c => c.ComunidadeMembros)
-        .Select(c => new ComunidadeResponse (
-            c.IdComunidade,
-            c.IdUsuarioCriador,
-            c.IdUsuarioCriadorNavigation != null ? c.IdUsuarioCriadorNavigation.Nome : null,
-            c.Nome,
-            c.Descricao,
-            c.Foto,
-            c.ComunidadeMembros.Count,
-            c.DataCriacao
-        ))
-        .ToListAsync();
+            .Include(c => c.IdUsuarioCriadorNavigation)
+            .Include(c => c.ComunidadeMembros)
+            .Select(c => new ComunidadeResponse(
+                c.IdComunidade,
+                c.IdUsuarioCriador,
+                c.IdUsuarioCriadorNavigation != null ? c.IdUsuarioCriadorNavigation.Nome : null,
+                c.Nome,
+                c.Descricao,
+                c.Foto,
+                c.ComunidadeMembros.Count,
+                c.DataCriacao
+            ))
+            .ToListAsync();
 
         return Ok(comunidades);
     }
 
-    [HttpGet ("{id}")]
-    public async Task<IActionResult> ObterComunidadePorId (int id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> ObterComunidadePorId(int id)
     {
         var comunidade = await _context.Comunidades
-        .Include(c => c.IdUsuarioCriadorNavigation)
-        .Include(c => c.ComunidadeMembros)
-        .FirstOrDefaultAsync(c => c.IdComunidade == id);
+            .Include(c => c.IdUsuarioCriadorNavigation)
+            .Include(c => c.ComunidadeMembros)
+            .FirstOrDefaultAsync(c => c.IdComunidade == id);
 
-        if(comunidade == null)
-        return NotFound(new {Message = "Comunidade não encontrada"});
+        if (comunidade == null)
+            return NotFound(new { Message = "Comunidade não encontrada" });
 
         int usuarioIdLogado = ObterUsuarioIdLogado();
         bool ehMembro = comunidade.ComunidadeMembros.Any(cm => cm.IdUsuario == usuarioIdLogado);
 
         return Ok(new
         {
-         Comunidade = new ComunidadeResponse(
-            comunidade.IdComunidade,
-            comunidade.IdUsuarioCriador,
-            comunidade.IdUsuarioCriadorNavigation?.Nome,
-            comunidade.Nome,
-            comunidade.Descricao,
-            comunidade.Foto,
-            comunidade.ComunidadeMembros.Count,
-            comunidade.DataCriacao
-         ),
-         EhMembro = ehMembro    
-        }
-        );
+            Comunidade = new ComunidadeResponse(
+                comunidade.IdComunidade,
+                comunidade.IdUsuarioCriador,
+                comunidade.IdUsuarioCriadorNavigation?.Nome,
+                comunidade.Nome,
+                comunidade.Descricao,
+                comunidade.Foto,
+                comunidade.ComunidadeMembros.Count,
+                comunidade.DataCriacao
+            ),
+            EhMembro = ehMembro
+        });
     }
 
     [HttpPost]
@@ -82,9 +81,9 @@ namespace PrimataArchive.Api.Controllers;
         int usuarioId = ObterUsuarioIdLogado();
 
         bool nomeExiste = await _context.Comunidades.AnyAsync(c => c.Nome == request.Nome);
-        if(nomeExiste)
-        return BadRequest(new {Message = "Já existe uma comunidade com esse nome."});
-        
+        if (nomeExiste)
+            return BadRequest(new { Message = "Já existe uma comunidade com esse nome." });
+
         var comunidade = new Comunidade
         {
             IdUsuarioCriador = usuarioId,
@@ -118,7 +117,7 @@ namespace PrimataArchive.Api.Controllers;
             comunidade.DataCriacao
         );
 
-        return CreatedAtAction(nameof (ObterComunidadePorId), new {id = comunidade.IdComunidade}, response);
+        return CreatedAtAction(nameof(ObterComunidadePorId), new { id = comunidade.IdComunidade }, response);
     }
 
     [HttpPost("{id}/entrar")]
@@ -128,14 +127,14 @@ namespace PrimataArchive.Api.Controllers;
         int usuarioId = ObterUsuarioIdLogado();
 
         var comunidadeExiste = await _context.Comunidades.AnyAsync(c => c.IdComunidade == id);
-        if(!comunidadeExiste)
-        return NotFound (new {Message = "Comunidade não encontrada."});
+        if (!comunidadeExiste)
+            return NotFound(new { Message = "Comunidade não encontrada." });
 
         bool jaEhMembro = await _context.ComunidadeMembros
-        .AnyAsync (cm => cm.IdComunidade == id && cm.IdUsuario == usuarioId);
+            .AnyAsync(cm => cm.IdComunidade == id && cm.IdUsuario == usuarioId);
 
-        if(jaEhMembro)
-        return BadRequest(new {Message = "Você já é membro dessa comunidade."});
+        if (jaEhMembro)
+            return BadRequest(new { Message = "Você já é membro dessa comunidade." });
 
         var membro = new ComunidadeMembro
         {
@@ -147,7 +146,24 @@ namespace PrimataArchive.Api.Controllers;
         _context.ComunidadeMembros.Add(membro);
         await _context.SaveChangesAsync();
 
-        return Ok(new {Message = "Você entrou na comunidade com sucesso."});
+        return Ok(new { Message = "Você entrou na comunidade com sucesso." });
     }
 
+    [HttpDelete("{id}/sair")]
+    [Authorize]
+    public async Task<IActionResult> SairDaComunidade(int id)
+    {
+        int usuarioId = ObterUsuarioIdLogado();
+
+        var membro = await _context.ComunidadeMembros
+            .FirstOrDefaultAsync(cm => cm.IdComunidade == id && cm.IdUsuario == usuarioId);
+
+        if (membro == null)
+            return BadRequest(new { Message = "Você não é membro desta comunidade." });
+
+        _context.ComunidadeMembros.Remove(membro);
+        await _context.SaveChangesAsync();
+
+        return NoContent();
     }
+}
