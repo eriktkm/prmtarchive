@@ -3,16 +3,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PrimataArchive.Api.Models;
-
 namespace PrimataArchive.Api.Models;
-
 [ApiController]
 [Route("api/[controller]")]
 public class PostController : ControllerBase
 {
     private readonly  PrimataArchiveContext _context;
 
-    public PostController(PrimataArchive context)
+    public PostController(PrimataArchiveContext context)
     {
         _context = context;
     }
@@ -20,7 +18,7 @@ public class PostController : ControllerBase
     private int ObterUsuarioIdLogado()
     {
         var idClaim = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        return int.tryParse(idClaim, out int id) ? id : 0;
+        return int.TryParse(idClaim, out int id) ? id : 0;
     }
 
     [HttpGet]
@@ -29,7 +27,7 @@ public class PostController : ControllerBase
         var query = _context.Posts.AsQueryable();
 
         if(idComunidade.HasValue)
-        query = query.Where(p => p.idComunidade == idComunidade.Value);
+        query = query.Where(p => p.IdComunidade == idComunidade.Value);
 
         var posts = await query
             .Include(p => p.IdUsuarioNavigation)
@@ -49,10 +47,8 @@ public class PostController : ControllerBase
                 p.DataPublicacao
             ))
             .ToListAsync();
-
             return Ok(posts);
     }
-
     [HttpGet("{id}")]
     public async Task<IActionResult> ObterPostPorId (int id)
     {
@@ -62,10 +58,8 @@ public class PostController : ControllerBase
         .Include(p => p.Comentarios)
         .ThenInclude(c => c.IdUsuarioNavigation)
         .FirstOrDefaultAsync(p => p.IdPost == id);
-
         if(post == null)
         return NotFound(new {Message = "Post não encontrado."});
-
         var Comentarios = post.Comentarios
         .OrderBy(c => c.DataComentario)
         .Select(c => new ComentarioResponse(
@@ -77,7 +71,6 @@ public class PostController : ControllerBase
             c.DataComentario
         ))
         .ToList();
-
         return Ok(new{
         Post = new PostResponse(
             post.IdPost,
@@ -91,7 +84,7 @@ public class PostController : ControllerBase
                 post.Comentarios.Count,
                 post.DataPublicacao
         ),
-        Comentarios = comentarios
+        comentarios = Comentarios
         });
     }
     [HttpPost]
@@ -100,28 +93,25 @@ public class PostController : ControllerBase
     {
         int usuarioId = ObterUsuarioIdLogado();
 
-        if (request.IdComunidade.HasValue)
+        if (request.idComunidade.HasValue)
         {
             bool comunidadeExiste = await _context.Comunidades
-                .AnyAsync(c => c.IdComunidade == request.IdComunidade.Value);
+                .AnyAsync(c => c.IdComunidade == request.idComunidade.Value);
 
             if (!comunidadeExiste)
                 return BadRequest(new { Message = "Comunidade informada não existe." });
         }
-
         var post = new Post
         {
             IdUsuario = usuarioId,
-            IdComunidade = request.IdComunidade,
+            IdComunidade = request.idComunidade,
             Titulo = request.Titulo,
             Conteudo = request.Conteudo,
             Imagem = request.Imagem,
             DataPublicacao = DateTime.UtcNow
         };
-
         _context.Posts.Add(post);
         await _context.SaveChangesAsync();
-
         var response = new PostResponse(
             post.IdPost,
             post.IdComunidade,
@@ -134,44 +124,17 @@ public class PostController : ControllerBase
             0,
             post.DataPublicacao
         );
-
         return CreatedAtAction(nameof(ObterPostPorId), new { id = post.IdPost }, response);
     }
 
-    [HttpPost("{id}/comentarios")]
+   [HttpPost("{id}/comentarios")]
     [Authorize]
     public async Task<IActionResult> AdicionarComentario(int id, [FromBody] CriarComentarioRequest request)
     {
         int usuarioId = ObterUsuarioIdLogado();
-
-        bool postExiste = await _context.Posts.AnyAsync(p => p.IdPost == id);
-        if (!postExiste)
-            return NotFound(new { Message = "Post não encontrado." });
-
-        var comentario = new Comentario
-        {
-            IdPost = id,
-            IdUsuario = usuarioId,
-            Conteudo = request.Conteudo,
-            DataComentario = DateTime.UtcNow
-        };
-
-        _context.Comentarios.Add(comentario);
-        await _context.SaveChangesAsync();
-
-        return Ok(new { Message = "Comentário adicionado com sucesso.", IdComentario = comentario.IdComentario });
-    }
-
-    [HttpPost("{id}/comentarios")]
-    [Authorize]
-    public async Task<IActionResult> AdicionarComentario(int id, [FromBody] CriarComentarioRequest request)
-    {
-        int usuarioId = ObterUsuarioIdLogado();
-
         bool postExiste = await _context.Posts.AnyAsync(p => p.IdPost == id);
         if(!postExiste)
         return NotFound(new {Message = "Post não encontrado."});
-
         var comentario = new Comentario
         {
             IdPost = id,
@@ -179,12 +142,8 @@ public class PostController : ControllerBase
             Conteudo = request.Conteudo,
             DataComentario = DateTime.UtcNow
         };
-
         _context.Comentarios.Add(comentario);
         await _context.SaveChangesAsync();
-
         return Ok(new {Message = "Comentário adicionado com sucesso.", IdComentario = comentario.IdComentario});
     }
 }
-
-

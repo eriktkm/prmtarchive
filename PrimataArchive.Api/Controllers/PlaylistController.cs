@@ -3,12 +3,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PrimataArchive.Api.Models;
-
 namespace PrimataArchive.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class PlaylistController : ControlerBase
+public class PlaylistController : ControllerBase
 {
     private readonly PrimataArchiveContext _context;
 
@@ -16,17 +15,16 @@ public class PlaylistController : ControlerBase
     {
         _context = context;
     } 
-
     private int ObterUsuarioIdLogado()
     {
         var idClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        return int.tryParse(idClaim, out int id) ? id : 0;
+        return int.TryParse(idClaim, out int id) ? id : 0;
     }
 
     [HttpGet]
     public async Task<IActionResult> ObterPlaylistsPublicas()
     {
-        var playlists = await _context.playlists
+        var playlists = await _context.Playlists
         .Include(p => p.IdUsuarioNavigation)
         .Include(p => p.PlaylistMusicas)
         .Where(p => p.Publica == true)
@@ -43,16 +41,13 @@ public class PlaylistController : ControlerBase
             p.DataCriacao
         ))
         .ToListAsync();
-
         return Ok(playlists);
     }
-
     [HttpGet("minhas")]
     [Authorize]
     public async Task<IActionResult> ObterMinhasPlaylists()
     {
         int usuarioId = ObterUsuarioIdLogado();
-
         var playlists = await _context.Playlists
         .Include(p => p.IdUsuarioNavigation)
             .Include(p => p.PlaylistMusicas)
@@ -70,10 +65,8 @@ public class PlaylistController : ControlerBase
                 p.DataCriacao
             ))
             .ToListAsync();
-
             return Ok(playlists);
     }
-
     [HttpGet("{id}")]
     public async Task<IActionResult> ObterPorId(int id)
     {
@@ -81,14 +74,11 @@ public class PlaylistController : ControlerBase
         .Include(p => p.IdUsuarioNavigation)
         .Include(p => p.PlaylistMusicas)
         .FirstOrDefaultAsync(p => p.IdPlaylist == id);
-
         if(playlist == null)
         return NotFound(new {Message = "Playlist não encontrada."});
-
         int usuarioIdLogado = ObterUsuarioIdLogado();
         if(playlist.Publica == false && playlist.IdUsuario != usuarioIdLogado)
         return Forbid();
-
         var response = new PlaylistResponse(
             playlist.IdPlaylist,
             playlist.IdUsuario,
@@ -100,13 +90,12 @@ public class PlaylistController : ControlerBase
             playlist.PlaylistMusicas.Count,
             playlist.DataCriacao
         );
-
         return Ok(response);
     }
 
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> Criar([FromBody] CriarPlaylist request)
+    public async Task<IActionResult> Criar([FromBody] CriarPlaylistRequest request)
     {
         int usuarioId = ObterUsuarioIdLogado();
 
@@ -119,10 +108,8 @@ public class PlaylistController : ControlerBase
             Publica = request.Publica,
             DataCriacao = DateTime.UtcNow
         };
-
         _context.Playlists.Add(playlist);
         await _context.SaveChangesAsync();
-
         var response = new PlaylistResponse
         (
             playlist.IdPlaylist,
@@ -136,7 +123,7 @@ public class PlaylistController : ControlerBase
             playlist.DataCriacao
         );
 
-        return CreatedAction(nameof(ObterPorId), new {id = playlist.IdPlaylist}, response);
+        return CreatedAtAction(nameof(ObterPorId), new {id = playlist.IdPlaylist}, response);
     }
 
     [HttpPost("{id}/musicas")]
@@ -147,68 +134,53 @@ public class PlaylistController : ControlerBase
 
         var playlist = await _context.Playlists.FirstOrDefaultAsync(p => p.IdPlaylist == id && p.IdUsuario == usuarioId);
         if(playlist == null)
-        return NotFound(new {Message = "Playlist não encontrada ou não pertence ao usuário."})
+        return NotFound(new {Message = "Playlist não encontrada ou não pertence ao usuário."});
 
         bool musicaExiste = await _context.Musicas.AnyAsync(m => m.IdMusica == request.IdMusica);
         if(!musicaExiste)
-        return NotFound(new {Message = "Musica não encontrada."})
+        return NotFound(new {Message = "Musica não encontrada."});
 
         bool jaExiste = await _context.PlaylistMusicas
         .AnyAsync(pm => pm.IdPlaylist == id && pm.IdMusica == request.IdMusica);
-
         if(jaExiste)
         return BadRequest(new {Message = "Essa música já está presente na playlist."});
-
         var playlistMusica = new PlaylistMusica
         {
             IdPlaylist = id,
-            IdMusica = requesr.IdMusica,
-            DataAdicao = DateTime.UtcNow
+            IdMusica = request.IdMusica,
         };
 
         _context.PlaylistMusicas.Add(playlistMusica);
         await _context.SaveChangesAsync();
-
         return Ok(new { Message = "Música adicionada à playlist com sucesso." });
     }
-
     [HttpDelete("{id}/musicas/{idMusica}")]
     [Authorize]
     public async Task<IActionResult> RemoverMusica(int id, int idMusica)
     {
         int usuarioId = ObterUsuarioIdLogado();
-
         var playlist = await _context.Playlists.FirstOrDefaultAsync(p => p.IdPlaylist == id && p.IdUsuario == usuarioId);
         if (playlist == null)
             return NotFound(new { Message = "Playlist não encontrada ou não pertence ao usuário." });
-
         var item = await _context.PlaylistMusicas
             .FirstOrDefaultAsync(pm => pm.IdPlaylist == id && pm.IdMusica == idMusica);
-
         if (item == null)
             return NotFound(new { Message = "Música não encontrada nesta playlist." });
-
         _context.PlaylistMusicas.Remove(item);
         await _context.SaveChangesAsync();
-
         return NoContent();
     }
-
     [HttpDelete("{id}")]
     [Authorize]
     public async Task<IActionResult> Deletar(int id)
     {
         int usuarioId = ObterUsuarioIdLogado();
-
         var playlist = await _context.Playlists.FirstOrDefaultAsync(p => p.IdPlaylist == id && p.IdUsuario == usuarioId);
         if (playlist == null)
             return NotFound(new { Message = "Playlist não encontrada ou não pertence ao usuário." });
-
         _context.Playlists.Remove(playlist);
         await _context.SaveChangesAsync();
-
         return NoContent();
     }
-
     
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -49,4 +49,5 @@ public partial class Denuncium
     [ForeignKey("IdUsuario")]
     [InverseProperty("Denuncia")]
     public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+    public int? IdUsuarioDenunciado { get; internal set; }
 }
